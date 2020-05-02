@@ -1,0 +1,6 @@
+[book]
+authors = ["Arturo J. Pérez"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Chip8VM Manual"

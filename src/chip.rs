@@ -497,9 +497,14 @@ impl Chip {
         self.i += (x + 1) as u16;
     }
 
+    /// Fills V0 to Vx with values from memory starting at address I.
+    /// I is set to I + x + 1
+    ///
+    /// # Parameters
+    /// * x - Register number for Vx.
     fn ld_vx_vi(&mut self, x: u8) {
-        for i in 0..=x {
-            self.registers[i as usize] = self.memory[(self.i + i as u16) as usize];
+        for register in 0..=x {
+            self.registers[register as usize] = self.memory[(self.i + register as u16) as usize];
         }
         self.i += (x + 1) as u16;
     }
@@ -1002,6 +1007,35 @@ mod tests {
         assert_eq!(chip.memory[0x20D], 0);
         assert_eq!(chip.memory[0x20E], 0);
         assert_eq!(chip.memory[0x20F], 128);
+        assert_eq!(chip.i, 0x210);
+    }
+
+    #[test]
+    fn opcode_ld_vx_vi() {
+        let mut chip = Chip::default();
+        chip.memory[0x200] = 32;
+        chip.memory[0x206] = 64;
+        chip.memory[0x20F] = 128;
+        chip.i = 0x200;
+        chip.ld_vx_vi(FLAG as u8);
+
+        assert_eq!(chip.registers[0x0], 32);
+        assert_eq!(chip.registers[0x1], 0);
+        assert_eq!(chip.registers[0x2], 0);
+        assert_eq!(chip.registers[0x2], 0);
+        assert_eq!(chip.registers[0x3], 0);
+        assert_eq!(chip.registers[0x4], 0);
+        assert_eq!(chip.registers[0x5], 0);
+        assert_eq!(chip.registers[0x6], 64);
+        assert_eq!(chip.registers[0x7], 0);
+        assert_eq!(chip.registers[0x8], 0);
+        assert_eq!(chip.registers[0x9], 0);
+        assert_eq!(chip.registers[0xA], 0);
+        assert_eq!(chip.registers[0xB], 0);
+        assert_eq!(chip.registers[0xC], 0);
+        assert_eq!(chip.registers[0xD], 0);
+        assert_eq!(chip.registers[0xE], 0);
+        assert_eq!(chip.registers[0xF], 128);
         assert_eq!(chip.i, 0x210);
     }
 }

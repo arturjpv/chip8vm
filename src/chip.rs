@@ -957,15 +957,15 @@ mod tests {
         assert_eq!(chip.i, (chip.registers[2] * CHARACTER_SIZE as u8) as u16);
     }
 
-    // #[test]
-    // fn opcode_ld_b_vx() {
-    //     let mut chip = Chip::default();
-    //
-    //     chip.registers[2] = 128;
-    //     chip.ld_b_vx(2);
-    //
-    //     assert_eq!(chip.memory[chip.i], 1);
-    //     assert_eq!(chip.memory[chip.i + 1], 2);
-    //     assert_eq!(chip.memory[chip.i + 2], 8);
-    // }
+    #[test]
+    fn opcode_ld_b_vx() {
+         let mut chip = Chip::default();
+
+         chip.registers[2] = 128;
+         chip.ld_b_vx(2);
+
+         assert_eq!(chip.memory[chip.i as usize], 1);
+         assert_eq!(chip.memory[(chip.i + 1) as usize], 2);
+         assert_eq!(chip.memory[(chip.i + 2) as usize], 8);
+    }
 }

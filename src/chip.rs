@@ -476,6 +476,8 @@ impl Chip {
     /// Stores BCD representation of the value contained in register Vx.
     /// Storing the result in I, I + 1 and I + 2.
     ///
+    /// # Parameters
+    /// * x - Register number for Vx.
     fn ld_b_vx(&mut self, x: u8) {
         let vx = self.registers[x as usize];
         self.memory[self.i as usize] = vx / 100;

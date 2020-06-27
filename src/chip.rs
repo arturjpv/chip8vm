@@ -113,7 +113,7 @@ impl Chip {
     /// * keypad -
     ///
     /// This method should be called at a frequency around 600Hz.
-    pub fn tick(&mut self, random: &impl Random, screen: &mut impl Screen, keypad: &impl Keypad) -> bool {
+    pub fn tick(&mut self, random: &mut impl Random, screen: &mut impl Screen, keypad: &impl Keypad) -> bool {
         let op_high = self.memory[self.ip] as u16;
         let op_low = self.memory[self.ip + 1] as u16;
         let opcode = op_high << 8 | op_low;
@@ -382,7 +382,7 @@ impl Chip {
         self.ip = (address + self.registers[0 as usize] as u16) as usize;
     }
 
-    fn rnd_vx_byte(&mut self, random: &impl Random, x: u8, mask: u8) {
+    fn rnd_vx_byte(&mut self, random: &mut impl Random, x: u8, mask: u8) {
         self.registers[x as usize] = random.range() & mask;
     }
 

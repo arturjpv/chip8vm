@@ -23,7 +23,7 @@ pub const PROGRAM_SIZE: usize = PROG_END - PROG_START;
 /// Random trait used by Chip 8 VM to get random numbers.
 pub trait Random {
     /// This function returns a random number between 0 and 255.
-    fn range(&self) -> u8;
+    fn range(&mut self) -> u8;
 }
 
 

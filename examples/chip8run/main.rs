@@ -7,13 +7,13 @@ use std::fs;
 use std::path::Path;
 
 mod cli;
-mod random;
 mod keypad;
+mod random;
 mod screen;
 
 use chip8vm::{chip::Chip, PROGRAM_SIZE};
-use random::*;
 use keypad::*;
+use random::*;
 use screen::*;
 
 const TICKS_X_FRAME: u32 = 10;
@@ -155,7 +155,10 @@ impl event::EventHandler for Chip8Run {
 
         // emulate cpu
         for _i in 0..TICKS_X_FRAME {
-            if !self.chip.tick(&self.random, &mut self.screen, &self.keypad) {
+            if !self
+                .chip
+                .tick(&mut self.random, &mut self.screen, &self.keypad)
+            {
                 quit(context);
             }
         }

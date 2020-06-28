@@ -62,7 +62,9 @@ impl Screen {
 
 impl chip8vm::Screen for Screen {
     fn clear(&mut self) {
-        self.pixels.iter_mut().map(|x| *x = PixelState::OFF).count();
+        for pixel in self.pixels.iter_mut() {
+            *pixel = PixelState::OFF;
+        }
     }
 
     fn draw(&mut self, x: u8, y: u8) -> bool {

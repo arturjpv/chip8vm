@@ -522,7 +522,7 @@ mod tests {
     struct TestRandom {}
 
     impl Random for TestRandom {
-        fn range(&self) -> u8 {
+        fn range(&mut self) -> u8 {
             1
         }
     }
@@ -630,9 +630,9 @@ mod tests {
     #[test]
     fn tick_opcode_0x00() {
         let program_code: [u8; 10] = [0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0];
-        let (mut chip, random, mut screen, keypad) = prepare_vm(program_code);
+        let (mut chip, mut random, mut screen, keypad) = prepare_vm(program_code);
 
-        let result = chip.tick(&random, &mut screen, &keypad);
+        let result = chip.tick(&mut random, &mut screen, &keypad);
 
         assert_eq!(result, false);
         assert_eq!(chip.ip, PROG_START + 2);

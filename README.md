@@ -1,6 +1,8 @@
 # About chip8vm
 chip8vm is a [rust](https://www.rust-lang.org/) learning project. This library provides a full implementation of the CHIP-8 instruction set for the [chip8rtic](https://github.com/arturjpv/chip8rtic) project.
 
+chip8vm and chip8rtic were inspired by Chapter 5 of [Rust in Action](https://manning.com/books/rust-in-action) by Tim McNamara.
+
 
 # Running the example
 The library includes a quick test application using the [ggez](https://ggez.rs/) library to test the emulator in the computer before integration with [chip8rtic](https://github.com/arturjpv/chip8rtic).
